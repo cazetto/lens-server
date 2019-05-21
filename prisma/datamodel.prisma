@@ -1,8 +1,11 @@
 type Link {
   id: ID! @id
-  createdAt: DateTime! @createdAt
+  title: String!
+  slug: String!
   description: String!
+  content: String!
   url: String!
+  createdAt: DateTime! @createdAt
   postedBy: User
   votes: [Vote!]!
 }

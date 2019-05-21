@@ -18,7 +18,7 @@ type Feed {
 }
 
 type Mutation {
-  post(url: String!, description: String!): Link!
+  post(title: String!, description: String!, content: String!, slug: String!, url: String! ): Link!
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   vote(linkId: ID!): Vote
@@ -43,7 +43,10 @@ type User {
 
 type Link {
   id: ID!
+  title: String!
   description: String!
+  content: String!
+  slug: String!
   url: String!
   postedBy: User
   votes: [Vote!]!
