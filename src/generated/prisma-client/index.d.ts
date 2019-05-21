@@ -16,7 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
-  link: (where?: LinkWhereInput) => Promise<boolean>;
+  post: (where?: PostWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
   vote: (where?: VoteWhereInput) => Promise<boolean>;
 }
@@ -40,25 +40,25 @@ export interface Prisma {
    * Queries
    */
 
-  link: (where: LinkWhereUniqueInput) => LinkNullablePromise;
-  links: (args?: {
-    where?: LinkWhereInput;
-    orderBy?: LinkOrderByInput;
+  post: (where: PostWhereUniqueInput) => PostNullablePromise;
+  posts: (args?: {
+    where?: PostWhereInput;
+    orderBy?: PostOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<Link>;
-  linksConnection: (args?: {
-    where?: LinkWhereInput;
-    orderBy?: LinkOrderByInput;
+  }) => FragmentableArray<Post>;
+  postsConnection: (args?: {
+    where?: PostWhereInput;
+    orderBy?: PostOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => LinkConnectionPromise;
+  }) => PostConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -103,22 +103,22 @@ export interface Prisma {
    * Mutations
    */
 
-  createLink: (data: LinkCreateInput) => LinkPromise;
-  updateLink: (args: {
-    data: LinkUpdateInput;
-    where: LinkWhereUniqueInput;
-  }) => LinkPromise;
-  updateManyLinks: (args: {
-    data: LinkUpdateManyMutationInput;
-    where?: LinkWhereInput;
+  createPost: (data: PostCreateInput) => PostPromise;
+  updatePost: (args: {
+    data: PostUpdateInput;
+    where: PostWhereUniqueInput;
+  }) => PostPromise;
+  updateManyPosts: (args: {
+    data: PostUpdateManyMutationInput;
+    where?: PostWhereInput;
   }) => BatchPayloadPromise;
-  upsertLink: (args: {
-    where: LinkWhereUniqueInput;
-    create: LinkCreateInput;
-    update: LinkUpdateInput;
-  }) => LinkPromise;
-  deleteLink: (where: LinkWhereUniqueInput) => LinkPromise;
-  deleteManyLinks: (where?: LinkWhereInput) => BatchPayloadPromise;
+  upsertPost: (args: {
+    where: PostWhereUniqueInput;
+    create: PostCreateInput;
+    update: PostUpdateInput;
+  }) => PostPromise;
+  deletePost: (where: PostWhereUniqueInput) => PostPromise;
+  deleteManyPosts: (where?: PostWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -156,9 +156,9 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  link: (
-    where?: LinkSubscriptionWhereInput
-  ) => LinkSubscriptionPayloadSubscription;
+  post: (
+    where?: PostSubscriptionWhereInput
+  ) => PostSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -175,7 +175,7 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type LinkOrderByInput =
+export type PostOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "title_ASC"
@@ -205,16 +205,16 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserUpdateOneWithoutLinksInput {
-  create?: Maybe<UserCreateWithoutLinksInput>;
-  update?: Maybe<UserUpdateWithoutLinksDataInput>;
-  upsert?: Maybe<UserUpsertWithoutLinksInput>;
+export interface UserUpdateOneWithoutPostsInput {
+  create?: Maybe<UserCreateWithoutPostsInput>;
+  update?: Maybe<UserUpdateWithoutPostsDataInput>;
+  upsert?: Maybe<UserUpsertWithoutPostsInput>;
   delete?: Maybe<Boolean>;
   disconnect?: Maybe<Boolean>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export type LinkWhereUniqueInput = AtLeastOne<{
+export type PostWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
@@ -223,7 +223,7 @@ export interface VoteUpdateWithWhereUniqueWithoutUserInput {
   data: VoteUpdateWithoutUserDataInput;
 }
 
-export interface LinkWhereInput {
+export interface PostWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -320,13 +320,13 @@ export interface LinkWhereInput {
   votes_every?: Maybe<VoteWhereInput>;
   votes_some?: Maybe<VoteWhereInput>;
   votes_none?: Maybe<VoteWhereInput>;
-  AND?: Maybe<LinkWhereInput[] | LinkWhereInput>;
-  OR?: Maybe<LinkWhereInput[] | LinkWhereInput>;
-  NOT?: Maybe<LinkWhereInput[] | LinkWhereInput>;
+  AND?: Maybe<PostWhereInput[] | PostWhereInput>;
+  OR?: Maybe<PostWhereInput[] | PostWhereInput>;
+  NOT?: Maybe<PostWhereInput[] | PostWhereInput>;
 }
 
 export interface VoteUpdateWithoutUserDataInput {
-  link?: Maybe<LinkUpdateOneRequiredWithoutVotesInput>;
+  post?: Maybe<PostUpdateOneRequiredWithoutVotesInput>;
 }
 
 export interface VoteWhereInput {
@@ -344,33 +344,33 @@ export interface VoteWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  link?: Maybe<LinkWhereInput>;
+  post?: Maybe<PostWhereInput>;
   user?: Maybe<UserWhereInput>;
   AND?: Maybe<VoteWhereInput[] | VoteWhereInput>;
   OR?: Maybe<VoteWhereInput[] | VoteWhereInput>;
   NOT?: Maybe<VoteWhereInput[] | VoteWhereInput>;
 }
 
-export interface VoteCreateManyWithoutLinkInput {
-  create?: Maybe<VoteCreateWithoutLinkInput[] | VoteCreateWithoutLinkInput>;
+export interface VoteCreateManyWithoutPostInput {
+  create?: Maybe<VoteCreateWithoutPostInput[] | VoteCreateWithoutPostInput>;
   connect?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
 }
 
-export interface LinkUpdateWithWhereUniqueWithoutPostedByInput {
-  where: LinkWhereUniqueInput;
-  data: LinkUpdateWithoutPostedByDataInput;
+export interface PostUpdateWithWhereUniqueWithoutPostedByInput {
+  where: PostWhereUniqueInput;
+  data: PostUpdateWithoutPostedByDataInput;
 }
 
-export interface VoteCreateWithoutLinkInput {
+export interface VoteCreateWithoutPostInput {
   id?: Maybe<ID_Input>;
   user: UserCreateOneWithoutVotesInput;
 }
 
-export interface LinkUpdateOneRequiredWithoutVotesInput {
-  create?: Maybe<LinkCreateWithoutVotesInput>;
-  update?: Maybe<LinkUpdateWithoutVotesDataInput>;
-  upsert?: Maybe<LinkUpsertWithoutVotesInput>;
-  connect?: Maybe<LinkWhereUniqueInput>;
+export interface PostUpdateOneRequiredWithoutVotesInput {
+  create?: Maybe<PostCreateWithoutVotesInput>;
+  update?: Maybe<PostUpdateWithoutVotesDataInput>;
+  upsert?: Maybe<PostUpsertWithoutVotesInput>;
+  connect?: Maybe<PostWhereUniqueInput>;
 }
 
 export interface UserCreateOneWithoutVotesInput {
@@ -394,19 +394,19 @@ export interface UserCreateWithoutVotesInput {
   name: String;
   email: String;
   password: String;
-  links?: Maybe<LinkCreateManyWithoutPostedByInput>;
+  posts?: Maybe<PostCreateManyWithoutPostedByInput>;
 }
 
 export interface VoteUpdateInput {
-  link?: Maybe<LinkUpdateOneRequiredWithoutVotesInput>;
+  post?: Maybe<PostUpdateOneRequiredWithoutVotesInput>;
   user?: Maybe<UserUpdateOneRequiredWithoutVotesInput>;
 }
 
-export interface LinkCreateManyWithoutPostedByInput {
+export interface PostCreateManyWithoutPostedByInput {
   create?: Maybe<
-    LinkCreateWithoutPostedByInput[] | LinkCreateWithoutPostedByInput
+    PostCreateWithoutPostedByInput[] | PostCreateWithoutPostedByInput
   >;
-  connect?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
+  connect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -415,35 +415,35 @@ export interface UserUpdateManyMutationInput {
   password?: Maybe<String>;
 }
 
-export interface LinkCreateWithoutPostedByInput {
+export interface PostCreateWithoutPostedByInput {
   id?: Maybe<ID_Input>;
   title: String;
   slug: String;
   description: String;
   content: String;
   url: String;
-  votes?: Maybe<VoteCreateManyWithoutLinkInput>;
+  votes?: Maybe<VoteCreateManyWithoutPostInput>;
 }
 
 export interface UserUpdateInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
-  links?: Maybe<LinkUpdateManyWithoutPostedByInput>;
+  posts?: Maybe<PostUpdateManyWithoutPostedByInput>;
   votes?: Maybe<VoteUpdateManyWithoutUserInput>;
 }
 
-export interface LinkUpdateInput {
+export interface PostUpdateInput {
   title?: Maybe<String>;
   slug?: Maybe<String>;
   description?: Maybe<String>;
   content?: Maybe<String>;
   url?: Maybe<String>;
-  postedBy?: Maybe<UserUpdateOneWithoutLinksInput>;
-  votes?: Maybe<VoteUpdateManyWithoutLinkInput>;
+  postedBy?: Maybe<UserUpdateOneWithoutPostsInput>;
+  votes?: Maybe<VoteUpdateManyWithoutPostInput>;
 }
 
-export interface LinkUpdateManyMutationInput {
+export interface PostUpdateManyMutationInput {
   title?: Maybe<String>;
   slug?: Maybe<String>;
   description?: Maybe<String>;
@@ -451,7 +451,7 @@ export interface LinkUpdateManyMutationInput {
   url?: Maybe<String>;
 }
 
-export interface LinkScalarWhereInput {
+export interface PostScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -544,23 +544,23 @@ export interface LinkScalarWhereInput {
   createdAt_lte?: Maybe<DateTimeInput>;
   createdAt_gt?: Maybe<DateTimeInput>;
   createdAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
-  OR?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
-  NOT?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
+  AND?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
+  OR?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
+  NOT?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
 }
 
 export type VoteWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface UserUpdateWithoutLinksDataInput {
+export interface UserUpdateWithoutPostsDataInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   votes?: Maybe<VoteUpdateManyWithoutUserInput>;
 }
 
-export interface LinkUpdateManyDataInput {
+export interface PostUpdateManyDataInput {
   title?: Maybe<String>;
   slug?: Maybe<String>;
   description?: Maybe<String>;
@@ -585,8 +585,8 @@ export interface VoteUpdateManyWithoutUserInput {
   deleteMany?: Maybe<VoteScalarWhereInput[] | VoteScalarWhereInput>;
 }
 
-export interface UserCreateOneWithoutLinksInput {
-  create?: Maybe<UserCreateWithoutLinksInput>;
+export interface UserCreateOneWithoutPostsInput {
+  create?: Maybe<UserCreateWithoutPostsInput>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
@@ -647,9 +647,9 @@ export interface UserWhereInput {
   password_not_starts_with?: Maybe<String>;
   password_ends_with?: Maybe<String>;
   password_not_ends_with?: Maybe<String>;
-  links_every?: Maybe<LinkWhereInput>;
-  links_some?: Maybe<LinkWhereInput>;
-  links_none?: Maybe<LinkWhereInput>;
+  posts_every?: Maybe<PostWhereInput>;
+  posts_some?: Maybe<PostWhereInput>;
+  posts_none?: Maybe<PostWhereInput>;
   votes_every?: Maybe<VoteWhereInput>;
   votes_some?: Maybe<VoteWhereInput>;
   votes_none?: Maybe<VoteWhereInput>;
@@ -663,24 +663,24 @@ export interface VoteCreateManyWithoutUserInput {
   connect?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
 }
 
-export interface LinkUpsertWithWhereUniqueWithoutPostedByInput {
-  where: LinkWhereUniqueInput;
-  update: LinkUpdateWithoutPostedByDataInput;
-  create: LinkCreateWithoutPostedByInput;
+export interface PostUpsertWithWhereUniqueWithoutPostedByInput {
+  where: PostWhereUniqueInput;
+  update: PostUpdateWithoutPostedByDataInput;
+  create: PostCreateWithoutPostedByInput;
 }
 
-export interface LinkCreateOneWithoutVotesInput {
-  create?: Maybe<LinkCreateWithoutVotesInput>;
-  connect?: Maybe<LinkWhereUniqueInput>;
+export interface PostCreateOneWithoutVotesInput {
+  create?: Maybe<PostCreateWithoutVotesInput>;
+  connect?: Maybe<PostWhereUniqueInput>;
 }
 
-export interface LinkUpdateWithoutPostedByDataInput {
+export interface PostUpdateWithoutPostedByDataInput {
   title?: Maybe<String>;
   slug?: Maybe<String>;
   description?: Maybe<String>;
   content?: Maybe<String>;
   url?: Maybe<String>;
-  votes?: Maybe<VoteUpdateManyWithoutLinkInput>;
+  votes?: Maybe<VoteUpdateManyWithoutPostInput>;
 }
 
 export interface VoteSubscriptionWhereInput {
@@ -694,24 +694,24 @@ export interface VoteSubscriptionWhereInput {
   NOT?: Maybe<VoteSubscriptionWhereInput[] | VoteSubscriptionWhereInput>;
 }
 
-export interface LinkUpdateWithoutVotesDataInput {
+export interface PostUpdateWithoutVotesDataInput {
   title?: Maybe<String>;
   slug?: Maybe<String>;
   description?: Maybe<String>;
   content?: Maybe<String>;
   url?: Maybe<String>;
-  postedBy?: Maybe<UserUpdateOneWithoutLinksInput>;
+  postedBy?: Maybe<UserUpdateOneWithoutPostsInput>;
 }
 
 export interface VoteCreateInput {
   id?: Maybe<ID_Input>;
-  link: LinkCreateOneWithoutVotesInput;
+  post: PostCreateOneWithoutVotesInput;
   user: UserCreateOneWithoutVotesInput;
 }
 
-export interface LinkUpsertWithoutVotesInput {
-  update: LinkUpdateWithoutVotesDataInput;
-  create: LinkCreateWithoutVotesInput;
+export interface PostUpsertWithoutVotesInput {
+  update: PostUpdateWithoutVotesDataInput;
+  create: PostCreateWithoutVotesInput;
 }
 
 export interface UserCreateInput {
@@ -719,7 +719,7 @@ export interface UserCreateInput {
   name: String;
   email: String;
   password: String;
-  links?: Maybe<LinkCreateManyWithoutPostedByInput>;
+  posts?: Maybe<PostCreateManyWithoutPostedByInput>;
   votes?: Maybe<VoteCreateManyWithoutUserInput>;
 }
 
@@ -754,85 +754,85 @@ export interface VoteScalarWhereInput {
   NOT?: Maybe<VoteScalarWhereInput[] | VoteScalarWhereInput>;
 }
 
-export interface LinkCreateInput {
+export interface PostCreateInput {
   id?: Maybe<ID_Input>;
   title: String;
   slug: String;
   description: String;
   content: String;
   url: String;
-  postedBy?: Maybe<UserCreateOneWithoutLinksInput>;
-  votes?: Maybe<VoteCreateManyWithoutLinkInput>;
+  postedBy?: Maybe<UserCreateOneWithoutPostsInput>;
+  votes?: Maybe<VoteCreateManyWithoutPostInput>;
 }
 
-export interface UserUpsertWithoutLinksInput {
-  update: UserUpdateWithoutLinksDataInput;
-  create: UserCreateWithoutLinksInput;
+export interface UserUpsertWithoutPostsInput {
+  update: UserUpdateWithoutPostsDataInput;
+  create: UserCreateWithoutPostsInput;
 }
 
 export interface VoteCreateWithoutUserInput {
   id?: Maybe<ID_Input>;
-  link: LinkCreateOneWithoutVotesInput;
+  post: PostCreateOneWithoutVotesInput;
 }
 
-export interface VoteUpdateManyWithoutLinkInput {
-  create?: Maybe<VoteCreateWithoutLinkInput[] | VoteCreateWithoutLinkInput>;
+export interface VoteUpdateManyWithoutPostInput {
+  create?: Maybe<VoteCreateWithoutPostInput[] | VoteCreateWithoutPostInput>;
   delete?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
   connect?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
   set?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
   disconnect?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
   update?: Maybe<
-    | VoteUpdateWithWhereUniqueWithoutLinkInput[]
-    | VoteUpdateWithWhereUniqueWithoutLinkInput
+    | VoteUpdateWithWhereUniqueWithoutPostInput[]
+    | VoteUpdateWithWhereUniqueWithoutPostInput
   >;
   upsert?: Maybe<
-    | VoteUpsertWithWhereUniqueWithoutLinkInput[]
-    | VoteUpsertWithWhereUniqueWithoutLinkInput
+    | VoteUpsertWithWhereUniqueWithoutPostInput[]
+    | VoteUpsertWithWhereUniqueWithoutPostInput
   >;
   deleteMany?: Maybe<VoteScalarWhereInput[] | VoteScalarWhereInput>;
 }
 
-export interface LinkSubscriptionWhereInput {
+export interface PostSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<LinkWhereInput>;
-  AND?: Maybe<LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput>;
-  OR?: Maybe<LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput>;
-  NOT?: Maybe<LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput>;
+  node?: Maybe<PostWhereInput>;
+  AND?: Maybe<PostSubscriptionWhereInput[] | PostSubscriptionWhereInput>;
+  OR?: Maybe<PostSubscriptionWhereInput[] | PostSubscriptionWhereInput>;
+  NOT?: Maybe<PostSubscriptionWhereInput[] | PostSubscriptionWhereInput>;
 }
 
-export interface VoteUpdateWithWhereUniqueWithoutLinkInput {
+export interface VoteUpdateWithWhereUniqueWithoutPostInput {
   where: VoteWhereUniqueInput;
-  data: VoteUpdateWithoutLinkDataInput;
+  data: VoteUpdateWithoutPostDataInput;
 }
 
-export interface VoteUpsertWithWhereUniqueWithoutLinkInput {
+export interface VoteUpsertWithWhereUniqueWithoutPostInput {
   where: VoteWhereUniqueInput;
-  update: VoteUpdateWithoutLinkDataInput;
-  create: VoteCreateWithoutLinkInput;
+  update: VoteUpdateWithoutPostDataInput;
+  create: VoteCreateWithoutPostInput;
 }
 
-export interface LinkUpdateManyWithoutPostedByInput {
+export interface PostUpdateManyWithoutPostedByInput {
   create?: Maybe<
-    LinkCreateWithoutPostedByInput[] | LinkCreateWithoutPostedByInput
+    PostCreateWithoutPostedByInput[] | PostCreateWithoutPostedByInput
   >;
-  delete?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
-  connect?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
-  set?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
-  disconnect?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
+  delete?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
+  connect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
+  set?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
+  disconnect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
   update?: Maybe<
-    | LinkUpdateWithWhereUniqueWithoutPostedByInput[]
-    | LinkUpdateWithWhereUniqueWithoutPostedByInput
+    | PostUpdateWithWhereUniqueWithoutPostedByInput[]
+    | PostUpdateWithWhereUniqueWithoutPostedByInput
   >;
   upsert?: Maybe<
-    | LinkUpsertWithWhereUniqueWithoutPostedByInput[]
-    | LinkUpsertWithWhereUniqueWithoutPostedByInput
+    | PostUpsertWithWhereUniqueWithoutPostedByInput[]
+    | PostUpsertWithWhereUniqueWithoutPostedByInput
   >;
-  deleteMany?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
+  deleteMany?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
   updateMany?: Maybe<
-    LinkUpdateManyWithWhereNestedInput[] | LinkUpdateManyWithWhereNestedInput
+    PostUpdateManyWithWhereNestedInput[] | PostUpdateManyWithWhereNestedInput
   >;
 }
 
@@ -840,7 +840,7 @@ export interface UserUpdateWithoutVotesDataInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
-  links?: Maybe<LinkUpdateManyWithoutPostedByInput>;
+  posts?: Maybe<PostUpdateManyWithoutPostedByInput>;
 }
 
 export interface UserUpdateOneRequiredWithoutVotesInput {
@@ -850,13 +850,13 @@ export interface UserUpdateOneRequiredWithoutVotesInput {
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface VoteUpdateWithoutLinkDataInput {
+export interface VoteUpdateWithoutPostDataInput {
   user?: Maybe<UserUpdateOneRequiredWithoutVotesInput>;
 }
 
-export interface LinkUpdateManyWithWhereNestedInput {
-  where: LinkScalarWhereInput;
-  data: LinkUpdateManyDataInput;
+export interface PostUpdateManyWithWhereNestedInput {
+  where: PostScalarWhereInput;
+  data: PostUpdateManyDataInput;
 }
 
 export type UserWhereUniqueInput = AtLeastOne<{
@@ -864,17 +864,17 @@ export type UserWhereUniqueInput = AtLeastOne<{
   email?: Maybe<String>;
 }>;
 
-export interface LinkCreateWithoutVotesInput {
+export interface PostCreateWithoutVotesInput {
   id?: Maybe<ID_Input>;
   title: String;
   slug: String;
   description: String;
   content: String;
   url: String;
-  postedBy?: Maybe<UserCreateOneWithoutLinksInput>;
+  postedBy?: Maybe<UserCreateOneWithoutPostsInput>;
 }
 
-export interface UserCreateWithoutLinksInput {
+export interface UserCreateWithoutPostsInput {
   id?: Maybe<ID_Input>;
   name: String;
   email: String;
@@ -923,25 +923,25 @@ export interface UserConnectionSubscription
   aggregate: <T = AggregateUserSubscription>() => T;
 }
 
-export interface LinkConnection {
+export interface PostConnection {
   pageInfo: PageInfo;
-  edges: LinkEdge[];
+  edges: PostEdge[];
 }
 
-export interface LinkConnectionPromise
-  extends Promise<LinkConnection>,
+export interface PostConnectionPromise
+  extends Promise<PostConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<LinkEdge>>() => T;
-  aggregate: <T = AggregateLinkPromise>() => T;
+  edges: <T = FragmentableArray<PostEdge>>() => T;
+  aggregate: <T = AggregatePostPromise>() => T;
 }
 
-export interface LinkConnectionSubscription
-  extends Promise<AsyncIterator<LinkConnection>>,
+export interface PostConnectionSubscription
+  extends Promise<AsyncIterator<PostConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<LinkEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateLinkSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PostEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePostSubscription>() => T;
 }
 
 export interface UserPreviousValues {
@@ -969,18 +969,18 @@ export interface UserPreviousValuesSubscription
   password: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateLink {
+export interface AggregatePost {
   count: Int;
 }
 
-export interface AggregateLinkPromise
-  extends Promise<AggregateLink>,
+export interface AggregatePostPromise
+  extends Promise<AggregatePost>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateLinkSubscription
-  extends Promise<AsyncIterator<AggregateLink>>,
+export interface AggregatePostSubscription
+  extends Promise<AsyncIterator<AggregatePost>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -997,9 +997,9 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   name: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
-  links: <T = FragmentableArray<Link>>(args?: {
-    where?: LinkWhereInput;
-    orderBy?: LinkOrderByInput;
+  posts: <T = FragmentableArray<Post>>(args?: {
+    where?: PostWhereInput;
+    orderBy?: PostOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -1024,9 +1024,9 @@ export interface UserSubscription
   name: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
-  links: <T = Promise<AsyncIterator<LinkSubscription>>>(args?: {
-    where?: LinkWhereInput;
-    orderBy?: LinkOrderByInput;
+  posts: <T = Promise<AsyncIterator<PostSubscription>>>(args?: {
+    where?: PostWhereInput;
+    orderBy?: PostOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -1051,9 +1051,9 @@ export interface UserNullablePromise
   name: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
-  links: <T = FragmentableArray<Link>>(args?: {
-    where?: LinkWhereInput;
-    orderBy?: LinkOrderByInput;
+  posts: <T = FragmentableArray<Post>>(args?: {
+    where?: PostWhereInput;
+    orderBy?: PostOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -1087,20 +1087,20 @@ export interface AggregateVoteSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface LinkEdge {
-  node: Link;
+export interface PostEdge {
+  node: Post;
   cursor: String;
 }
 
-export interface LinkEdgePromise extends Promise<LinkEdge>, Fragmentable {
-  node: <T = LinkPromise>() => T;
+export interface PostEdgePromise extends Promise<PostEdge>, Fragmentable {
+  node: <T = PostPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface LinkEdgeSubscription
-  extends Promise<AsyncIterator<LinkEdge>>,
+export interface PostEdgeSubscription
+  extends Promise<AsyncIterator<PostEdge>>,
     Fragmentable {
-  node: <T = LinkSubscription>() => T;
+  node: <T = PostSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
@@ -1173,7 +1173,7 @@ export interface Vote {
 
 export interface VotePromise extends Promise<Vote>, Fragmentable {
   id: () => Promise<ID_Output>;
-  link: <T = LinkPromise>() => T;
+  post: <T = PostPromise>() => T;
   user: <T = UserPromise>() => T;
 }
 
@@ -1181,7 +1181,7 @@ export interface VoteSubscription
   extends Promise<AsyncIterator<Vote>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  link: <T = LinkSubscription>() => T;
+  post: <T = PostSubscription>() => T;
   user: <T = UserSubscription>() => T;
 }
 
@@ -1189,11 +1189,11 @@ export interface VoteNullablePromise
   extends Promise<Vote | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  link: <T = LinkPromise>() => T;
+  post: <T = PostPromise>() => T;
   user: <T = UserPromise>() => T;
 }
 
-export interface LinkPreviousValues {
+export interface PostPreviousValues {
   id: ID_Output;
   title: String;
   slug: String;
@@ -1203,8 +1203,8 @@ export interface LinkPreviousValues {
   createdAt: DateTimeOutput;
 }
 
-export interface LinkPreviousValuesPromise
-  extends Promise<LinkPreviousValues>,
+export interface PostPreviousValuesPromise
+  extends Promise<PostPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
@@ -1215,8 +1215,8 @@ export interface LinkPreviousValuesPromise
   createdAt: () => Promise<DateTimeOutput>;
 }
 
-export interface LinkPreviousValuesSubscription
-  extends Promise<AsyncIterator<LinkPreviousValues>>,
+export interface PostPreviousValuesSubscription
+  extends Promise<AsyncIterator<PostPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   title: () => Promise<AsyncIterator<String>>;
@@ -1227,32 +1227,32 @@ export interface LinkPreviousValuesSubscription
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface LinkSubscriptionPayload {
+export interface PostSubscriptionPayload {
   mutation: MutationType;
-  node: Link;
+  node: Post;
   updatedFields: String[];
-  previousValues: LinkPreviousValues;
+  previousValues: PostPreviousValues;
 }
 
-export interface LinkSubscriptionPayloadPromise
-  extends Promise<LinkSubscriptionPayload>,
+export interface PostSubscriptionPayloadPromise
+  extends Promise<PostSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = LinkPromise>() => T;
+  node: <T = PostPromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = LinkPreviousValuesPromise>() => T;
+  previousValues: <T = PostPreviousValuesPromise>() => T;
 }
 
-export interface LinkSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<LinkSubscriptionPayload>>,
+export interface PostSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PostSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = LinkSubscription>() => T;
+  node: <T = PostSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = LinkPreviousValuesSubscription>() => T;
+  previousValues: <T = PostPreviousValuesSubscription>() => T;
 }
 
-export interface Link {
+export interface Post {
   id: ID_Output;
   title: String;
   slug: String;
@@ -1262,7 +1262,7 @@ export interface Link {
   createdAt: DateTimeOutput;
 }
 
-export interface LinkPromise extends Promise<Link>, Fragmentable {
+export interface PostPromise extends Promise<Post>, Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
   slug: () => Promise<String>;
@@ -1282,8 +1282,8 @@ export interface LinkPromise extends Promise<Link>, Fragmentable {
   }) => T;
 }
 
-export interface LinkSubscription
-  extends Promise<AsyncIterator<Link>>,
+export interface PostSubscription
+  extends Promise<AsyncIterator<Post>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   title: () => Promise<AsyncIterator<String>>;
@@ -1304,8 +1304,8 @@ export interface LinkSubscription
   }) => T;
 }
 
-export interface LinkNullablePromise
-  extends Promise<Link | null>,
+export interface PostNullablePromise
+  extends Promise<Post | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
@@ -1462,7 +1462,7 @@ export type Boolean = boolean;
 
 export const models: Model[] = [
   {
-    name: "Link",
+    name: "Post",
     embedded: false
   },
   {

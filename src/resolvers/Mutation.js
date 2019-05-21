@@ -4,7 +4,7 @@ const { APP_SECRET, getUserId } = require('../utils')
 
 function post(parent, args, context, info) {
   const userId = getUserId(context)
-  return context.prisma.createLink({
+  return context.prisma.createPost({
     title: args.title,
     description: args.description,
     content: args.content,
@@ -47,17 +47,17 @@ async function login(parent, args, context, info) {
 
 async function vote(parent, args, context, info) {
   const userId = getUserId(context)
-  const linkExists = await context.prisma.$exists.vote({
+  const postExists = await context.prisma.$exists.vote({
     user: { id: userId },
-    link: { id: args.linkId },
+    post: { id: args.postId },
   })
-  if (linkExists) {
-    throw new Error(`Already voted for link: ${args.linkId}`)
+  if (postExists) {
+    throw new Error(`Already voted for post: ${args.postId}`)
   }
 
   return context.prisma.createVote({
     user: { connect: { id: userId } },
-    link: { connect: { id: args.linkId } },
+    post: { connect: { id: args.postId } },
   })
 }
 

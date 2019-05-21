@@ -1,9 +1,9 @@
-function newLinkSubscribe(parent, args, context, info) {
-  return context.prisma.$subscribe.link({ mutation_in: ['CREATED'] }).node()
+function newPostSubscribe(parent, args, context, info) {
+  return context.prisma.$subscribe.post({ mutation_in: ['CREATED'] }).node()
 }
 
-const newLink = {
-  subscribe: newLinkSubscribe,
+const newPost = {
+  subscribe: newPostSubscribe,
   resolve: payload => {
     return payload
   },
@@ -21,6 +21,6 @@ const newVote = {
 }
 
 module.exports = {
-  newLink,
+  newPost,
   newVote,
 }

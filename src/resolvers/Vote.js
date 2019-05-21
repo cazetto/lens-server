@@ -1,5 +1,5 @@
-function link(parent, args, context) {
-  return context.prisma.vote({ id: parent.id }).link()
+function post(parent, args, context) {
+  return context.prisma.vote({ id: parent.id }).post()
 }
 
 function user(parent, args, context) {
@@ -7,6 +7,6 @@ function user(parent, args, context) {
 }
 
 module.exports = {
-  link,
+  post,
   user,
 }
