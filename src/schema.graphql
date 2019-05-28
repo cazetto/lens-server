@@ -1,6 +1,6 @@
 type Query {
-  info: String!
   feed(filter: String, skip: Int, first: Int, orderBy: PostOrderByInput): Feed!
+  post(id: ID, slug: String): Post!
 }
 
 enum PostOrderByInput {
@@ -48,7 +48,7 @@ type Post {
   content: String!
   slug: String!
   url: String!
-  postedBy: User
+  postedBy: User!
   votes: [Vote!]!
 }
 

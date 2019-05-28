@@ -22,12 +22,29 @@ async function feed(parent, args, context) {
     })
     .aggregate()
     .count()
+
   return {
     posts,
     count,
   }
 }
 
+async function post(parent, { id, slug }, context) {
+  const where = (id || slug)
+    ? {
+        OR: [
+          { id },
+          { slug },
+        ],
+      }
+    : {}
+
+  const post = await context.prisma.posts({ where })
+
+  return post[0];
+}
+
 module.exports = {
   feed,
+  post,
 }
