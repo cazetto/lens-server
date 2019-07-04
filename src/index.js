@@ -1,5 +1,7 @@
 const { GraphQLServer } = require('graphql-yoga')
+const jwt = require('jsonwebtoken')
 const { prisma } = require('./generated/prisma-client')
+const { APP_SECRET, getUserId } = require('./utils')
 const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
 const Subscription = require('./resolvers/Subscription')
@@ -26,4 +28,5 @@ const server = new GraphQLServer({
     }
   },
 })
+
 server.start(() => console.log(`Server is running on http://localhost:4000`))

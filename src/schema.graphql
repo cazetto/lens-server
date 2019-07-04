@@ -1,4 +1,5 @@
 type Query {
+  me: User
   feed(filter: String, skip: Int, first: Int, orderBy: PostOrderByInput): Feed!
   post(id: ID, slug: String): Post!
 }
@@ -38,7 +39,7 @@ type User {
   id: ID!
   name: String!
   email: String!
-  posts: [Post!]!
+  posts: [Post!]
 }
 
 type Post {
